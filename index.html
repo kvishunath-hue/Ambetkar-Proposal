@@ -48,14 +48,19 @@ body::before{
 
 /* ============ NAVIGATION ============ */
 .topnav{
-  position:sticky;top:0;left:0;right:0;z-index:50;
+  position:fixed;top:0;left:0;right:0;z-index:100;
   background:linear-gradient(180deg, rgba(14,26,43,.96), rgba(14,26,43,.82));
-  backdrop-filter:blur(12px);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
   border-bottom:1px solid var(--line);
   padding:14px 56px;
   display:flex;align-items:center;justify-content:space-between;
   gap:24px;
+  box-shadow:0 8px 32px rgba(0,0,0,.25);
 }
+body{padding-top:78px}
+
+section[id]{scroll-margin-top:90px}
 .topnav .brand{display:flex;align-items:center;gap:14px}
 .brand-mark{
   width:44px;height:44px;border-radius:50%;flex-shrink:0;
@@ -919,6 +924,83 @@ footer.foot{
       <h5>Payment Milestones</h5>
       <p>Linked to phase sign-offs, not calendar dates — protects both sides against schedule drift.</p>
     </div>
+  </div>
+  <!-- Investment tiers · no numbers -->
+  <div class="reveal" style="margin-top:64px">
+    <h3 style="font-family:'Fraunces',serif;font-size:32px;font-weight:400;letter-spacing:-1px;color:var(--ivory);margin-bottom:8px">Three engagement tiers</h3>
+    <p style="font-size:16px;line-height:1.6;color:var(--ivory-2);opacity:.8;max-width:780px;margin-bottom:32px">Each tier scopes a complete delivery against the BOQ. Indicative pricing is shared in a separate priced schedule on request, after the alignment call with the consultant.</p>
+  </div>
+
+  <div class="tiers">
+    <div class="tier reveal">
+      <div class="tier-name">Tier · Essential</div>
+      <div class="tier-title">Platform</div>
+      <div class="tier-sub">Software spine for all 17 BOQ kiosks.</div>
+      <div class="tier-price"><span class="amount-text">On Request</span></div>
+      <div class="tier-price-note">Software platform &amp; trilingual content delivery</div>
+      <ul class="tier-features">
+        <li>Kiosk shell (Electron / Chromium) for all 17 BOQ items</li>
+        <li>Headless CMS (Strapi / Directus) + admin dashboard</li>
+        <li>All 17 gallery modules: timeline, flipbook, multilingual reader, video carousel, search, map, photo &amp; testimonial booth software, robotic-arm controller</li>
+        <li>Trilingual content authoring (EN · हिं · తె) — scripts, copy, translation, captions</li>
+        <li>Curated archival image set with rights documentation</li>
+        <li>Offline-first delivery · local SSD cache</li>
+        <li>Analytics dashboard · remote management</li>
+        <li>12-month defect warranty + 6-month content care window</li>
+        <li class="no">Original photography campaign not included</li>
+        <li class="no">Films &amp; curved-LED content not included</li>
+        <li class="no">360° wayfinding not included</li>
+      </ul>
+    </div>
+
+    <div class="tier featured reveal">
+      <div class="tier-name">Tier · Standard</div>
+      <div class="tier-title">Memorial</div>
+      <div class="tier-sub">Platform plus the full creative-media programme.</div>
+      <div class="tier-price"><span class="amount-text">On Request</span></div>
+      <div class="tier-price-note">Recommended · platform + films + canvases + photography</div>
+      <ul class="tier-features">
+        <li>Everything in Platform</li>
+        <li><strong>Three Modern India films</strong> (BOQ #2) · 3 minutes each · 4K, 5.1 audio, EN/हिं/తె voice-over, original score</li>
+        <li><strong>Curved-LED canvas content</strong> · Item 18 (Ambedkar &amp; the World, 128 sft) + Item 19 (Universal Rights, 224 sft) — bespoke motion graphics at native curved resolution</li>
+        <li><strong>Original on-site photography</strong> · 5-day campaign · ~200 images of the complex, statue, galleries, visitor vignettes</li>
+        <li>Timeline motion graphics (12 events, 15–20 sec each)</li>
+        <li>Robotic-arm signature programming + safety calibration (BOQ #6)</li>
+        <li>Souvenir visitor-guide design (print-ready)</li>
+        <li>Accessibility mode + audio-narration recording across all kiosks</li>
+        <li>Staff training session + curatorial committee onboarding</li>
+        <li>24-month defect warranty + 12-month content care window</li>
+        <li>Two rounds of content updates included</li>
+        <li class="no">360° wayfinding not included (available as add-on)</li>
+      </ul>
+    </div>
+
+    <div class="tier reveal">
+      <div class="tier-name">Tier · Premium</div>
+      <div class="tier-title">Statue of Equality</div>
+      <div class="tier-sub">Everything, including the immersive &amp; outreach layer.</div>
+      <div class="tier-price"><span class="amount-text">On Request</span></div>
+      <div class="tier-price-note">Full programme + immersive + outreach assets</div>
+      <ul class="tier-features">
+        <li>Everything in Memorial</li>
+        <li><strong>360° wayfinding kiosk</strong> at G1 Entrance (item 17 add-on) + virtual gallery previews of all 7 galleries</li>
+        <li><strong>Public-facing web 360° tour</strong> for school outreach &amp; international audiences</li>
+        <li><strong>Documentary film</strong> · "The Making of the Memorial" · 10-minute behind-the-scenes piece for the lounge listening booth</li>
+        <li><strong>Drone / aerial photography</strong> · statue, campus, Hussain Sagar precinct</li>
+        <li>Two additional language layers (e.g. Marathi, Tamil, Kannada, Bengali, Urdu)</li>
+        <li>Constituent Assembly Debates explorer · extended archival module (BOQ #10)</li>
+        <li>Quarterly health-check site visits</li>
+        <li>36-month defect warranty + 24-month content care window</li>
+        <li>Three rounds of content updates included</li>
+        <li>Year-2 / Year-3 annual care option pre-priced</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pricing-note reveal" style="margin-top:32px;padding:24px 28px;background:rgba(245,239,226,.04);border:1px solid var(--line);border-radius:14px;font-size:13px;line-height:1.65;color:var(--ivory-2);opacity:.85">
+    <p style="margin-bottom:10px"><strong style="color:var(--saffron)">Hardware excluded.</strong> Touchscreens, projectors, mini-PCs, robotic arm, LED panels, all-in-ones and Surface tables are supplied by the hardware partner under the same BOQ. Civil, electrical, mounting and on-site rigging are also out of scope here.</p>
+    <p style="margin-bottom:10px"><strong style="color:var(--saffron)">Payment milestones.</strong> Linked to phase sign-offs — 15% on mobilisation · 20% on design lock · 25% on platform alpha · 20% on content delivery · 15% on UAT · 5% on warranty close.</p>
+    <p><strong style="color:var(--saffron)">GST.</strong> All quotes are exclusive of GST, applicable at the rate prevailing on invoice date (currently 18%).</p>
   </div>
 </section>
 
