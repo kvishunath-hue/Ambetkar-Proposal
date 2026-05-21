@@ -26,7 +26,7 @@
   --shadow:0 30px 80px rgba(0,0,0,.45);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{overflow-x:hidden;width:100%;max-width:100%;position:relative}
+html,body{overflow-x:hidden;width:100%;max-width:100%;position:relative;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 html{scroll-behavior:smooth}
 body{
   background:
@@ -39,6 +39,7 @@ body{
   -webkit-font-smoothing:antialiased;
   min-height:100vh;min-height:100dvh;
   overscroll-behavior-x:none;
+  overscroll-behavior:contain;
 }
 body::before{
   content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
@@ -470,6 +471,141 @@ footer.foot{
 .reveal.in{opacity:1;transform:translateY(0)}
 
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms !important;transition-duration:.01ms !important}.reveal{opacity:1;transform:none}}
+
+/* ============ MOBILE RESPONSIVE ============ */
+@media (max-width: 768px) {
+  /* Header NOT persistent on mobile — flows with the page */
+  .topnav{
+    position:static;
+    padding:14px 18px;
+    box-shadow:none;
+    gap:10px;
+  }
+  body{padding-top:0}
+  section[id]{scroll-margin-top:20px}
+
+  .brand-mark{width:36px;height:36px}
+  .brand-mark svg{width:14px;height:14px}
+  .brand-info .top{font-size:9px;letter-spacing:2px}
+  .brand-info .main{font-size:14px}
+
+  /* Hero */
+  .hero{padding:48px 20px 56px;gap:36px;text-align:center}
+  .hero-eyebrow{font-size:10px;letter-spacing:3px;margin-bottom:20px;justify-content:center}
+  .hero-eyebrow::before{width:24px}
+  .hero h1{font-size:32px;letter-spacing:-1px;margin-bottom:18px}
+  .hero .lede{font-size:15px;max-width:none;margin-bottom:28px}
+  .hero-meta{flex-direction:column;gap:18px;padding-top:22px;align-items:center}
+  .meta-item .lbl{font-size:9px;letter-spacing:1.5px}
+  .meta-item .val{font-size:15px}
+  .hero-monogram{height:360px;max-width:300px}
+  .hero-monogram svg.mono{width:210px;height:270px}
+  .hero-monogram .corner{width:36px;height:36px}
+  .hero-monogram .corner.tl, .hero-monogram .corner.tr{top:16px}
+  .hero-monogram .corner.bl, .hero-monogram .corner.br{bottom:16px}
+  .hero-monogram .corner.tl, .hero-monogram .corner.bl{left:16px}
+  .hero-monogram .corner.tr, .hero-monogram .corner.br{right:16px}
+  .hero-monogram .stamp{bottom:36px}
+  .hero-monogram .stamp .n{font-size:14px;letter-spacing:3px}
+  .hero-monogram .stamp .y{font-size:9px;letter-spacing:4px}
+
+  /* Hero opening quote pull */
+  .hero > div > div[style*="border-left"]{font-size:15px !important;padding:16px 20px !important}
+
+  /* Section base */
+  .section{padding:48px 18px}
+  .section-eyebrow{font-size:10px;letter-spacing:3px;margin-bottom:14px}
+  .section-eyebrow::before{width:24px}
+  .section h2{font-size:26px;letter-spacing:-.8px;margin-bottom:24px;line-height:1.1}
+  .section .intro{font-size:14px;line-height:1.6;margin-bottom:28px}
+
+  /* At-a-glance row */
+  #glance .about-grid{grid-template-columns:1fr !important;gap:12px !important}
+  .about-card{padding:18px 20px}
+  .about-card h4{font-size:18px;margin-bottom:10px}
+  .about-card p{font-size:13px;line-height:1.55}
+
+  /* Scope grid */
+  .scope-grid{grid-template-columns:1fr;gap:14px;margin-top:20px}
+  .scope-card{padding:22px 20px}
+  .scope-card .icon{width:42px;height:42px;border-radius:10px;margin-bottom:16px}
+  .scope-card .icon svg{width:20px;height:20px}
+  .scope-card h4{font-size:17px;margin-bottom:8px}
+  .scope-card p{font-size:13px;line-height:1.55}
+  .scope-card .tag{font-size:8px;padding:3px 8px}
+
+  /* Galleries */
+  .gallery-row{grid-template-columns:48px 1fr !important;gap:12px !important;padding:16px !important}
+  .gallery-row .num{font-size:26px}
+  .gallery-row .info h5{font-size:15px}
+  .gallery-row .info p{font-size:12px;line-height:1.45}
+
+  /* Deliverables / BOQ table */
+  .deliverables{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .deliverables table{min-width:540px}
+  .deliverables td, .deliverables th{padding:10px 12px !important;font-size:11.5px !important}
+  .deliverables td.cat{font-size:12.5px !important;width:auto !important;min-width:120px}
+
+  /* Phases */
+  .phases{padding-left:24px;margin-top:20px}
+  .phase{padding:18px 0 22px 22px}
+  .phase::before{left:-18px;width:14px;height:14px;top:24px}
+  .phase h4{font-size:18px}
+  .phase .week{font-size:10px;letter-spacing:2px;margin-bottom:10px}
+  .phase p{font-size:13px;line-height:1.55}
+  .phase li{font-size:12.5px;line-height:1.55}
+
+  /* Investment tiers */
+  .tiers{grid-template-columns:1fr;gap:20px;margin-top:24px}
+  .tier{padding:30px 22px 24px}
+  .tier-name{font-size:10px;letter-spacing:3px;margin-bottom:10px}
+  .tier-title{font-size:24px}
+  .tier-sub{font-size:12.5px;margin-bottom:20px}
+  .tier-price .amount-text{font-size:26px}
+  .tier-price-note{font-size:10px;margin-bottom:20px}
+  .tier-features li{font-size:12.5px;padding:8px 0;gap:10px}
+  .tier-features li::before{margin-top:6px}
+
+  /* Pricing note */
+  .pricing-note{padding:18px 20px;font-size:12px;line-height:1.55}
+
+  /* Terms / Risk */
+  .terms-grid{grid-template-columns:1fr;gap:14px;margin-top:24px}
+  .term-card{padding:18px 20px}
+  .term-card h5{font-size:10px;letter-spacing:2px;margin-bottom:8px}
+  .term-card p{font-size:12.5px;line-height:1.55}
+
+  /* Tier features in Brief (3-layer model) */
+  #brief .tiers .tier-title{font-size:22px !important}
+
+  /* Why us section uses scope-grid styling — already covered */
+
+  /* Contact section */
+  .contact{padding:56px 18px 48px}
+  .contact .lede{font-size:14px;line-height:1.55}
+  .contact > div > div[style*="max-width:780px"]{margin:24px 0 36px !important}
+  .contact > div > div[style*="max-width:780px"] > div{margin-bottom:14px !important}
+  .contact > div > div[style*="max-width:780px"] > div > div:first-child{width:26px !important;height:26px !important;font-size:11px !important}
+  .contact > div > div[style*="max-width:780px"] > div > div:last-child{font-size:13.5px !important;line-height:1.55 !important}
+  .contact-info{flex-direction:column;gap:18px;margin-bottom:36px}
+  .contact-info .ci{text-align:center}
+  .contact-info .ci .val{font-size:16px}
+  .cta-btn{padding:16px 32px;font-size:11px;letter-spacing:2px;gap:10px}
+  .cta-btn svg{width:14px;height:14px}
+  .contact > div > div[style*="max-width:680px"]{padding:18px 20px !important;font-size:15px !important;margin-top:40px !important;line-height:1.55 !important}
+
+  /* Footer */
+  footer.foot{padding:18px;flex-direction:column;gap:8px;text-align:center;font-size:10px}
+
+  /* Team table — same wrapper as deliverables */
+}
+
+/* Smaller phones — extra trims */
+@media (max-width: 420px) {
+  .hero h1{font-size:28px}
+  .section h2{font-size:22px}
+  .tier-title{font-size:22px}
+}
 </style>
 </head>
 <body>
