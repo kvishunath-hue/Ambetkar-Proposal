@@ -474,6 +474,11 @@ footer.foot{
 
 /* ============ MOBILE RESPONSIVE ============ */
 @media (max-width: 768px) {
+  /* HARD LOCK: nothing on the page can be wider than the viewport */
+  html, body { width: 100%; max-width: 100vw; overflow-x: hidden !important }
+  * { max-width: 100vw }
+  .hero, .section, .contact, footer.foot, .topnav { max-width: 100vw; overflow-x: hidden }
+
   /* Header NOT persistent on mobile — flows with the page */
   .topnav{
     position:static;
@@ -540,9 +545,13 @@ footer.foot{
   .gallery-row .info h5{font-size:15px}
   .gallery-row .info p{font-size:12px;line-height:1.45}
 
-  /* Deliverables / BOQ table */
-  .deliverables{overflow-x:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain;touch-action:pan-x}
-  .deliverables table{min-width:540px}
+  /* Deliverables / BOQ table — table can be wider but is scrolled INSIDE its wrapper */
+  .deliverables{
+    overflow-x:auto;-webkit-overflow-scrolling:touch;
+    overscroll-behavior-x:contain;touch-action:pan-x;
+    max-width:100%;width:100%;
+  }
+  .deliverables table{min-width:540px;width:100%}
   .deliverables td, .deliverables th{padding:10px 12px !important;font-size:11.5px !important}
   .deliverables td.cat{font-size:12.5px !important;width:auto !important;min-width:120px}
 
