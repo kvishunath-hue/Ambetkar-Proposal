@@ -615,6 +615,140 @@ footer.foot{
   .section h2{font-size:22px}
   .tier-title{font-size:22px}
 }
+
+/* ============ MOBILE PERSISTENT MENU (top-right) ============ */
+.m-menu-btn,
+.m-menu-drawer,
+.m-menu-backdrop { display: none }
+
+@media (max-width: 768px) {
+  /* Hamburger button — fixed top right, always visible while scrolling */
+  .m-menu-btn {
+    display: flex; flex-direction: column; justify-content: center; gap: 5px;
+    position: fixed; top: 14px; right: 14px; z-index: 200;
+    width: 46px; height: 46px;
+    background: linear-gradient(180deg, rgba(14,26,43,.96), rgba(14,26,43,.82));
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--line-strong);
+    border-radius: 12px;
+    padding: 13px 11px;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0,0,0,.4), inset 0 1px 0 rgba(245,239,226,.1);
+    transition: all .25s ease;
+  }
+  .m-menu-btn:active { transform: scale(.95) }
+  .m-menu-btn span {
+    display: block; width: 100%; height: 2px;
+    background: var(--ivory); border-radius: 2px;
+    transition: all .3s cubic-bezier(.4,0,.2,1);
+  }
+  .m-menu-btn.open { background: var(--saffron); border-color: var(--saffron) }
+  .m-menu-btn.open span { background: #fff }
+  .m-menu-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg) }
+  .m-menu-btn.open span:nth-child(2) { opacity: 0 }
+  .m-menu-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) }
+
+  /* Drawer that slides in from the right */
+  .m-menu-drawer {
+    display: flex; flex-direction: column;
+    position: fixed; top: 0; right: 0; bottom: 0;
+    width: min(320px, 86vw); z-index: 199;
+    background: linear-gradient(180deg, #0e1a2b 0%, #0a1422 100%);
+    border-left: 1px solid var(--line-strong);
+    box-shadow: -8px 0 32px rgba(0,0,0,.5);
+    transform: translateX(100%);
+    transition: transform .35s cubic-bezier(.4,0,.2,1);
+    overflow: hidden;
+  }
+  .m-menu-drawer::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at 100% 0%, rgba(201,122,43,.12), transparent 50%),
+                radial-gradient(ellipse at 0% 100%, rgba(47,107,101,.12), transparent 50%);
+  }
+  .m-menu-drawer.open { transform: translateX(0) }
+
+  /* Backdrop dim */
+  .m-menu-backdrop {
+    display: block; position: fixed; inset: 0; z-index: 198;
+    background: rgba(0,0,0,.5); backdrop-filter: blur(2px);
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s ease;
+  }
+  .m-menu-backdrop.open { opacity: 1; pointer-events: auto }
+
+  /* Drawer header */
+  .m-menu-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 14px;
+    padding: 22px 22px 18px; border-bottom: 1px solid var(--line);
+    flex-shrink: 0; position: relative; z-index: 1;
+  }
+  .m-menu-head .brand-info .top {
+    font-family: 'Inter', sans-serif; font-size: 9px; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--gold); font-weight: 600;
+  }
+  .m-menu-head .brand-info .main {
+    font-family: 'Fraunces', serif; font-size: 16px; color: var(--ivory);
+    font-weight: 500; letter-spacing: -.3px; margin-top: 3px; line-height: 1.2;
+  }
+  .m-menu-close {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: rgba(245,239,226,.06); border: 1px solid var(--line);
+    color: var(--ivory); cursor: pointer; display: grid; place-items: center;
+    transition: all .2s; flex-shrink: 0;
+  }
+  .m-menu-close:active { background: var(--saffron); border-color: var(--saffron) }
+  .m-menu-close svg { width: 18px; height: 18px }
+
+  /* Nav list */
+  .m-menu-list {
+    flex: 1; overflow-y: auto; padding: 12px 14px;
+    display: flex; flex-direction: column; gap: 2px;
+    position: relative; z-index: 1;
+  }
+  .m-menu-link {
+    display: flex; align-items: center; gap: 16px;
+    padding: 14px 16px; border-radius: 12px;
+    cursor: pointer; transition: all .2s ease;
+    border: 1px solid transparent;
+    font-family: 'Inter', sans-serif;
+  }
+  .m-menu-link .num {
+    font-size: 11px; letter-spacing: 2px; color: var(--gold);
+    font-weight: 700; opacity: .7; flex-shrink: 0;
+  }
+  .m-menu-link .lbl {
+    font-family: 'Fraunces', serif; font-size: 17px; color: var(--ivory);
+    font-weight: 500; letter-spacing: -.3px;
+  }
+  .m-menu-link:active {
+    background: rgba(245,239,226,.06);
+  }
+  .m-menu-link.active {
+    background: linear-gradient(90deg, rgba(201,122,43,.15), rgba(201,122,43,.05));
+    border-color: rgba(201,122,43,.4);
+  }
+  .m-menu-link.active .num { color: var(--saffron); opacity: 1 }
+  .m-menu-link.active .lbl { color: var(--saffron) }
+
+  /* Drawer footer with email CTA */
+  .m-menu-foot {
+    padding: 16px 22px 22px; border-top: 1px solid var(--line);
+    flex-shrink: 0; position: relative; z-index: 1;
+  }
+  .m-menu-cta {
+    display: flex; align-items: center; gap: 12px; padding: 14px 18px;
+    background: linear-gradient(180deg, var(--saffron), var(--saffron-2));
+    border-radius: 12px; color: #fff; text-decoration: none;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    letter-spacing: .3px;
+    box-shadow: 0 6px 16px var(--saffron-glow), inset 0 1px 0 rgba(255,255,255,.2);
+  }
+  .m-menu-cta svg { width: 16px; height: 16px; flex-shrink: 0 }
+  .m-menu-cta:active { transform: scale(.98) }
+
+  /* Body lock when drawer is open */
+  body.m-menu-open { overflow: hidden }
+}
 </style>
 </head>
 <body>
@@ -642,6 +776,61 @@ footer.foot{
 
 
 <!-- ============ TOP NAV ============ -->
+<!-- Mobile-only persistent menu (hidden on desktop) -->
+<button class="m-menu-btn" id="m-menu-btn" aria-label="Open menu" onclick="toggleMobileMenu()">
+  <span></span><span></span><span></span>
+</button>
+<div class="m-menu-drawer" id="m-menu-drawer">
+  <div class="m-menu-head">
+    <div class="brand-info">
+      <div class="top">Proposal · vkstudio.in</div>
+      <div class="main">Ambedkar Gallery</div>
+    </div>
+    <button class="m-menu-close" onclick="toggleMobileMenu()" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="6" x2="18" y2="18"/><line x1="18" y1="6" x2="6" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="m-menu-list">
+    <a class="m-menu-link active" data-target="hero" onclick="mobileGoTo('hero')">
+      <span class="num">01</span><span class="lbl">Overview</span>
+    </a>
+    <a class="m-menu-link" data-target="brief" onclick="mobileGoTo('brief')">
+      <span class="num">02</span><span class="lbl">The Brief</span>
+    </a>
+    <a class="m-menu-link" data-target="platform" onclick="mobileGoTo('platform')">
+      <span class="num">03</span><span class="lbl">Platform</span>
+    </a>
+    <a class="m-menu-link" data-target="boq" onclick="mobileGoTo('boq')">
+      <span class="num">04</span><span class="lbl">BOQ Map</span>
+    </a>
+    <a class="m-menu-link" data-target="content" onclick="mobileGoTo('content')">
+      <span class="num">05</span><span class="lbl">Content</span>
+    </a>
+    <a class="m-menu-link" data-target="phases" onclick="mobileGoTo('phases')">
+      <span class="num">06</span><span class="lbl">Delivery</span>
+    </a>
+    <a class="m-menu-link" data-target="commercials" onclick="mobileGoTo('commercials')">
+      <span class="num">07</span><span class="lbl">Commercials</span>
+    </a>
+    <a class="m-menu-link" data-target="risk" onclick="mobileGoTo('risk')">
+      <span class="num">08</span><span class="lbl">Risk</span>
+    </a>
+    <a class="m-menu-link" data-target="why" onclick="mobileGoTo('why')">
+      <span class="num">09</span><span class="lbl">About Us</span>
+    </a>
+    <a class="m-menu-link" data-target="contact" onclick="mobileGoTo('contact')">
+      <span class="num">10</span><span class="lbl">Next Steps</span>
+    </a>
+  </div>
+  <div class="m-menu-foot">
+    <a href="mailto:contact@vkstudio.in" class="m-menu-cta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v16H4z"/><polyline points="4 4 12 13 20 4"/></svg>
+      <span>contact@vkstudio.in</span>
+    </a>
+  </div>
+</div>
+<div class="m-menu-backdrop" id="m-menu-backdrop" onclick="toggleMobileMenu()"></div>
+
 <nav class="topnav">
   <div class="brand">
     <div class="brand-mark">
@@ -1314,13 +1503,30 @@ const sections = ['hero','brief','platform','boq','content','phases','commercial
 const observer = new IntersectionObserver(entries => {
   entries.forEach(en => {
     if (en.isIntersecting){
-      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-      const link = document.querySelector('.nav-link[data-target="'+en.target.id+'"]');
-      if (link) link.classList.add('active');
+      document.querySelectorAll('.nav-link, .m-menu-link').forEach(l => l.classList.remove('active'));
+      document.querySelectorAll('.nav-link[data-target="'+en.target.id+'"], .m-menu-link[data-target="'+en.target.id+'"]').forEach(l => l.classList.add('active'));
     }
   });
 }, {rootMargin: '-30% 0px -60% 0px'});
 sections.forEach(id => { const el = document.getElementById(id); if (el) observer.observe(el); });
+
+/* ============ MOBILE MENU ============ */
+function toggleMobileMenu(){
+  const btn = document.getElementById('m-menu-btn');
+  const drawer = document.getElementById('m-menu-drawer');
+  const backdrop = document.getElementById('m-menu-backdrop');
+  const isOpen = drawer.classList.toggle('open');
+  btn.classList.toggle('open', isOpen);
+  backdrop.classList.toggle('open', isOpen);
+  document.body.classList.toggle('m-menu-open', isOpen);
+}
+function mobileGoTo(id){
+  toggleMobileMenu();
+  setTimeout(() => {
+    const target = document.getElementById(id);
+    if (target) target.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 250);
+}
 
 /* ============ REVEAL ANIMATIONS ============ */
 function initReveal(){
