@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0e1a2b">
 <title>Proposal — Dr. B. R. Ambedkar Memorial Gallery, Hyderabad · vkstudio.in</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,8 +27,8 @@
   --shadow:0 30px 80px rgba(0,0,0,.45);
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{overflow-x:hidden;width:100%;max-width:100%;position:relative;-webkit-text-size-adjust:100%;text-size-adjust:100%}
-html{scroll-behavior:smooth}
+html,body{overflow-x:hidden;width:100%;max-width:100%;position:relative;-webkit-text-size-adjust:100%;text-size-adjust:100%;background:#0e1a2b}
+html{scroll-behavior:smooth;background:#0e1a2b}
 body{
   background:
     radial-gradient(ellipse at 20% 0%, rgba(201,122,43,.06), transparent 50%),
@@ -547,8 +548,10 @@ footer.foot{
 
   /* Deliverables / BOQ table — table can be wider but is scrolled INSIDE its wrapper */
   .deliverables{
-    overflow-x:auto;-webkit-overflow-scrolling:touch;
+    overflow-x:auto;overflow-y:visible;
+    -webkit-overflow-scrolling:touch;
     overscroll-behavior-x:contain;
+    touch-action:pan-x pan-y;
     max-width:100%;width:100%;
   }
   .deliverables table{min-width:540px;width:100%}
@@ -651,21 +654,24 @@ footer.foot{
   /* Drawer that slides in from the right */
   .m-menu-drawer {
     display: flex; flex-direction: column;
-    position: fixed; top: 0; right: 0; bottom: 0;
+    position: fixed; top: 0; bottom: 0;
+    right: 0;
     width: min(320px, 86vw); z-index: 199;
     background: linear-gradient(180deg, #0e1a2b 0%, #0a1422 100%);
     border-left: 1px solid var(--line-strong);
     box-shadow: -8px 0 32px rgba(0,0,0,.5);
-    transform: translateX(100%);
+    transform: translate3d(100%, 0, 0);
+    will-change: transform;
     transition: transform .35s cubic-bezier(.4,0,.2,1);
     overflow: hidden;
+    visibility: hidden;
   }
   .m-menu-drawer::before {
     content: ""; position: absolute; inset: 0; pointer-events: none;
     background: radial-gradient(ellipse at 100% 0%, rgba(201,122,43,.12), transparent 50%),
                 radial-gradient(ellipse at 0% 100%, rgba(47,107,101,.12), transparent 50%);
   }
-  .m-menu-drawer.open { transform: translateX(0) }
+  .m-menu-drawer.open { transform: translate3d(0, 0, 0); visibility: visible }
 
   /* Backdrop dim */
   .m-menu-backdrop {
@@ -1386,7 +1392,7 @@ footer.foot{
   <div class="reveal">
     <div class="section-eyebrow">08 · Why vkstudio.in</div>
     <h2>Software, content and imaging — <em>under one roof.</em></h2>
-    <p class="intro">vkstudio.in (Vishwanath Kothapalli) is a Huzurabad-based studio combining software engineering, content authoring, photography and filmmaking. Relevant strengths for this commission:</p>
+    <p class="intro">vkstudio.in (Vishwanath Kothapalli) is a Telangana-based studio combining software engineering, content authoring, photography and filmmaking. Relevant strengths for this commission:</p>
   </div>
 
   <div class="scope-grid">
@@ -1450,7 +1456,7 @@ footer.foot{
     <div class="contact-info">
       <div class="ci"><div class="lbl">Studio</div><div class="val">vkstudio.in</div></div>
       <div class="ci"><div class="lbl">Email</div><div class="val"><a href="mailto:contact@vkstudio.in">contact@vkstudio.in</a></div></div>
-      <div class="ci"><div class="lbl">Based In</div><div class="val">Huzurabad, Telangana</div></div>
+      <div class="ci"><div class="lbl">Based In</div><div class="val">Telangana, India</div></div>
     </div>
 
     <a href="mailto:contact@vkstudio.in?subject=Ambedkar%20Gallery%20—%20Demo%20Walk-through" class="cta-btn">
