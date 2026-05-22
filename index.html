@@ -458,7 +458,7 @@ footer.foot{
 .gate-title{font-family:'Fraunces',serif;font-size:26px;font-weight:400;color:var(--ivory);letter-spacing:-.5px;margin-bottom:10px;line-height:1.2}
 .gate-title em{font-style:italic;color:var(--saffron);font-weight:300}
 .gate-sub{font-family:'Fraunces',serif;font-size:14px;color:var(--ivory-2);opacity:.7;margin-bottom:32px;font-style:italic;line-height:1.5}
-.gate-input{width:100%;padding:14px 18px;background:rgba(245,239,226,.06);border:1px solid var(--line-strong);border-radius:12px;color:var(--ivory);font-family:'Inter',sans-serif;font-size:15px;letter-spacing:1px;text-align:center;outline:none;transition:all .2s}
+.gate-input{width:100%;padding:14px 18px;background:rgba(245,239,226,.06);border:1px solid var(--line-strong);border-radius:12px;color:var(--ivory);font-family:'Inter',sans-serif;font-size:16px;letter-spacing:1px;text-align:center;outline:none;transition:all .2s}
 .gate-input:focus{border-color:var(--saffron);background:rgba(245,239,226,.08);box-shadow:0 0 0 4px rgba(201,122,43,.15)}
 .gate-input::placeholder{color:rgba(245,239,226,.3);letter-spacing:2px}
 .gate-btn{width:100%;margin-top:14px;padding:14px;background:var(--saffron);color:#fff;border:none;border-radius:12px;font-family:'Inter',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;font-weight:600;cursor:pointer;transition:all .2s}
@@ -475,6 +475,9 @@ footer.foot{
 
 /* ============ MOBILE RESPONSIVE ============ */
 @media (max-width: 768px) {
+  /* iOS auto-zooms on input focus if font-size < 16px — prevent globally */
+  input, textarea, select { font-size: 16px !important }
+
   /* Page-level horizontal scroll lock — absolute */
   html { width: 100%; max-width: 100vw; overflow-x: hidden !important; overscroll-behavior-x: none }
   body { 
@@ -1499,9 +1502,19 @@ function checkPass(ev){
   ev.preventDefault();
   const input = document.getElementById('gate-pw').value.trim().toLowerCase().replace(/\s+/g,'');
   if (input === 'jaibhim') {
-    document.getElementById('gate').classList.add('hidden');
-    try{ sessionStorage.setItem('proposal_unlocked','1'); }catch(e){}
-    initReveal();
+    // Blur the input to release iOS keyboard + zoom-on-focus state
+    document.getElementById('gate-pw').blur();
+    // Scroll page to top before showing it
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    // Small delay lets Safari release the focus-zoom before we reveal the page
+    setTimeout(() => {
+      document.getElementById('gate').classList.add('hidden');
+      window.scrollTo(0, 0);
+      try{ sessionStorage.setItem('proposal_unlocked','1'); }catch(e){}
+      initReveal();
+    }, 80);
   } else {
     const err = document.getElementById('gate-err');
     err.classList.add('show');
@@ -1510,7 +1523,12 @@ function checkPass(ev){
   }
   return false;
 }
-try{ if (sessionStorage.getItem('proposal_unlocked') === '1') document.getElementById('gate').classList.add('hidden'); }catch(e){}
+try{ 
+  if (sessionStorage.getItem('proposal_unlocked') === '1') {
+    document.getElementById('gate').classList.add('hidden');
+    window.scrollTo(0, 0);
+  }
+}catch(e){}
 
 /* ============ NAV LINK SCROLL + ACTIVE ============ */
 document.querySelectorAll('.nav-link').forEach(link => {
