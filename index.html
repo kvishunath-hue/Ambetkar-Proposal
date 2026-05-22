@@ -475,10 +475,25 @@ footer.foot{
 
 /* ============ MOBILE RESPONSIVE ============ */
 @media (max-width: 768px) {
-  /* HARD LOCK: nothing on the page can be wider than the viewport */
-  html, body { width: 100%; max-width: 100vw; overflow-x: hidden !important }
-  * { max-width: 100vw }
-  .hero, .section, .contact, footer.foot, .topnav { max-width: 100vw; overflow-x: hidden }
+  /* Page-level horizontal scroll lock */
+  html, body { 
+    width: 100%; max-width: 100vw; 
+    overflow-x: hidden !important; 
+    overscroll-behavior-x: none;
+  }
+
+  /* Kill specific overflow sources */
+  .hero::before { display: none }  /* the 700px radial blob with right:-200px */
+  .hero-monogram { max-width: 100% }
+  .phases { padding-left: 24px; overflow: hidden }  /* contain phase decorations */
+  .phase::before { left: 6px }  /* was -18px, would overflow */
+
+  /* Force all top-level sections to clip horizontal overflow */
+  .hero, .section, .contact, footer.foot, .topnav,
+  #hero, #brief, #platform, #boq, #content, #phases,
+  #commercials, #risk, #why, #contact {
+    max-width: 100vw; overflow-x: hidden;
+  }
 
   /* Header NOT persistent on mobile — flows with the page */
   .topnav{
